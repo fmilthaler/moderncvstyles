@@ -5,4 +5,4 @@ This packages provides a few more styles/themes for the popular LaTeX moderncv p
 
 Requirements:
   * LaTeX
-  * moderncv package, see http://www.ctan.org/pkg/moderncv
+  * moderncv package, >= v. 1.5.1, see http://www.ctan.org/pkg/moderncv
