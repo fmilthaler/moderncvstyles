@@ -13,7 +13,7 @@ The moderncv package written and maintained by Xavier Danaux can be downloaded h
 The package provides a class and several styles, which were an inspiration for the styles of this project.
 
 License
-=============
+==============
 This work may be distributed and/or modified under the conditions of the LaTeX Project Public License version 1.3c, available at http://www.latex-project.org/lppl/.
 
 The Current Maintainer of this work is Frank Milthaler.
