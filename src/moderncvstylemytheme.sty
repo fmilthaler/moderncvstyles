@@ -44,6 +44,8 @@
 \moderncvicons{marvosym}
 % And adding the symbol for the address:
 \renewcommand*{\addresssymbol}{\marvosymbol{98}~}
+\newcommand*{\linksymbol}{\marvosymbol{90}~}
+\newcommand*{\keyboardsymbol}{\marvosymbol{207}~}
 
 
 % Modifying colors:
@@ -255,10 +257,20 @@
     \ifx&#7&%
       \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}}
 
-% Adding a new command for software project entries:
-\newcommand*{\cvswentry}[3][.25em]{%
-  \myhttplink[\color{black}{\textnormal{\textbf{\normalsize Fluidity}}}]
-  }
+% Adding a new command for software project entries, like cvitem but with http link:
+\newcommand*{\cvswitem}[4][.25em]{%
+  \cvitem[#1]{\myhttplink[\color{black}{\textnormal{\textbf{#2}}}]{#3}}{#4}
+  }%
+% And another command for software entries, but this time like cventry:
+\newcommand*{\cvswdetail}[7][.25em]{%
+  \cvitem[#1]{\myhttplink[\color{black}{\textnormal{\textbf{#2}}}]{#3}}{%link and link description
+    {\bfseries\copyright~#4}%author
+    \ifthenelse{\equal{#5}{}}{}{,~{\keyboardsymbol\slshape#5}}%programming language used
+    \ifthenelse{\equal{#6}{}}{}{,~\myhttplink[\color{black}{\linksymbol#6}]{#6}}%printed link
+    .\strut%
+    \ifx&#7&%description
+      \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}}
+
 
 \newbox{\cvitemwithcommentmainbox}
 \newlength{\cvitemwithcommentmainlength}
