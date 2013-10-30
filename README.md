@@ -2,7 +2,7 @@ moderncvstyles
 ==============
 This packages provides a few more styles/themes for the popular LaTeX moderncv package.
 
-Requirements
+Dependencies
 ==============
   * a working LaTeX distribution (e.g. TeX Live, see http://www.tug.org/texlive/)
   * moderncv package (>= v. 1.5.1)
