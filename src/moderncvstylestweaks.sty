@@ -73,4 +73,55 @@
       \else{\newline{}\begin{minipage}[t]{\linewidth}\small#6\end{minipage}}\fi}}
 
 
+\NewDocumentCommand{\refereeonecontact}{mG{}G{}G{}G{}mm}{%
+%  \expandafter\def\csname refereeaddressstreet\endcsname{#1}%
+  \def\@refereeoneaddressstreet{#1}\def\@refereeoneaddresslinetwo{#2}\def\@refereeoneaddresscity{#3}\def\@refereeoneaddresscounty{#4}\def\@refereeoneaddresscountry{#5}\def\@refereeonephonenumber{#6}\def\@refereeoneemail{#7}}
+
+\NewDocumentCommand{\refereeonedetails}{G{}mG{}}{%
+  \def\@refereeonerelation{#1}\def\@refereeonename{#2}\def\@refereeonetitle{#3}
+}
+
+\NewDocumentCommand{\refereeoneentry}{}{
+  \cvcolumn{\@refereeonerelation}{%
+    \begin{tabular}[b]{lp{1ex}l}
+      \multicolumn{3}{l}{\textbf{\@refereeonename}}\\
+      \multicolumn{3}{l}{\@refereeonetitle}\\
+      \addresssymbol & & \@refereeoneaddressstreet\\
+      & & \@refereeoneaddresslinetwo\\
+      & & \@refereeoneaddresscity\\
+      & & \@refereeoneaddresscounty\\
+      & & \@refereeoneaddresscountry\\
+      \phonesymbol & & \@refereeonephonenumber\\
+      \emailsymbol & & \emaillink{\@refereeoneemail}
+    \end{tabular}%
+  }}%
+  % entry has been written, flush details now:
+  %\flushreferee
+%}%
+
+
+\NewDocumentCommand{\refereetwocontact}{mG{}G{}G{}G{}mm}{%
+%  \expandafter\def\csname refereeaddressstreet\endcsname{#1}%
+  \def\@refereetwoaddressstreet{#1}\def\@refereetwoaddresslinetwo{#2}\def\@refereetwoaddresscity{#3}\def\@refereetwoaddresscounty{#4}\def\@refereetwoaddresscountry{#5}\def\@refereetwophonenumber{#6}\def\@refereetwoemail{#7}}
+
+\NewDocumentCommand{\refereetwodetails}{G{}mG{}}{%
+  \def\@refereetworelation{#1}\def\@refereetwoname{#2}\def\@refereetwotitle{#3}
+}
+
+\NewDocumentCommand{\refereetwoentry}{}{
+  \cvcolumn{\@refereetworelation}{%
+    \begin{tabular}[b]{lp{1ex}l}
+      \multicolumn{3}{l}{\textbf{\@refereetwoname}}\\
+      \multicolumn{3}{l}{\@refereetwotitle}\\
+      \addresssymbol & & \@refereetwoaddressstreet\\
+      & & \@refereetwoaddresslinetwo\\
+      & & \@refereetwoaddresscity\\
+      & & \@refereetwoaddresscounty\\
+      & & \@refereetwoaddresscountry\\
+      \phonesymbol & & \@refereetwophonenumber\\
+      \emailsymbol & & \emaillink{\@refereetwoemail}
+    \end{tabular}%
+  }
+}
+
 % end of file moderncvstylestweaks.sty
