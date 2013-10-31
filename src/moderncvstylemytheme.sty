@@ -16,6 +16,9 @@
 \ProvidesPackage{moderncvstylemytheme}[2013/10/29 a new style for v1.5.1 of the moderncv package, style name: mytheme]
 
 
+% Loading some tweaks/additions to the moderncv package
+\RequirePackage{moderncvstylestweaks}
+
 %-------------------------------------------------------------------------------
 %                required packages
 %-------------------------------------------------------------------------------
@@ -32,30 +35,6 @@
 
 
 %-------------------------------------------------------------------------------
-%                New address/title command allowing for more lines
-%-------------------------------------------------------------------------------
-\NewDocumentCommand{\longaddress}{mG{}G{}G{}G{}}{\def\@addressstreet{#1}\def\@addresslinetwo{#2}\def\@addresscity{#3}\def\@addresscounty{#4}\def\@addresscountry{#5}}
-\NewDocumentCommand{\longtitle}{mG{}G{}}{\def\@titleone{#1}\def\@titletwo{#2}\def\@titlethree{#3}}
-
-%-------------------------------------------------------------------------------
-%                overall style definition
-%-------------------------------------------------------------------------------
-% symbols
-\moderncvicons{marvosym}
-% And adding the symbol for the address:
-\renewcommand*{\addresssymbol}{\marvosymbol{98}~}
-\newcommand*{\linksymbol}{\marvosymbol{90}~}
-\newcommand*{\keyboardsymbol}{\marvosymbol{207}~}
-
-
-% Modifying colors:
-% adding grey color:
-\definecolor{namecolor}{RGB}{33,85,143}
-\definecolor{quotecolor}{rgb}{0.65,0.65,0.65}
-\definecolor{myurlcolor}{rgb}{0.35,0.35,0.35}
-
-
-%-------------------------------------------------------------------------------
 %                resume style definition
 %-------------------------------------------------------------------------------
 % fonts
@@ -68,7 +47,7 @@
 %\renewcommand*{\subsectionfont}{\large\mdseries\upshape}
 \renewcommand*{\subsectionfont}{\sffamily\large\mdseries\upshape\bfseries}
 \renewcommand*{\hintfont}{\sffamily\footnotesize}
-\newcommand*{\myurlfont}{\small\itshape} % \scshape \ttfamily
+
 
 % styles
 \renewcommand*{\namestyle}[1]{{\namefont\textcolor{namecolor}{#1}}}
@@ -78,14 +57,7 @@
 \renewcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{#1}}}
 \renewcommand*{\subsectionstyle}[1]{{\subsectionfont\textcolor{color1}{#1}}}
 \renewcommand*{\hintstyle}[1]{{\hintfont\textcolor{color0}{#1}}}
-%\renewcommand*{\myurlstyle}[1]{{\myurlfont\textcolor{myurlcolor}{#1}}}
-\newcommand*{\myurlstyle}[1]{{\myurlfont\color{myurlcolor}{#1}}}
 
-% Adding a new httplink command:
-\newcommand*{\myhttplink}[2][]{%
-  \ifthenelse{\equal{#1}{}}%
-    {\href{http://#2}{\myurlstyle{#2}}}%
-    {\href{http://#2}{\myurlstyle{#1}}}}
 
 % lengths
 \newlength{\quotewidth}
@@ -256,26 +228,6 @@
     .\strut%
     \ifx&#7&%
       \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}}
-
-% Adding a new command for software project entries, like cvitem but with http link:
-% usage: \cvswitem[spacing]{name of project}{optional: url}{description}
-\newcommand*{\cvswitem}[4][.25em]{%
-  \cvitem[#1]{\myhttplink[\color{black}{\textnormal{\textbf{#2}}}]{#3}}{#4}
-  }%
-% And another command for software entries, but this time like cventry:
-% usage: \cvswdetail[spacing]{name of project}{author/copyright}{programming language}{optional: url}{optional: comment/short program description}
-\newcommand*{\cvswdetail}[6][.25em]{%
-  \cvitem[#1]{%
-    \ifthenelse{\equal{#5}{}}% no link given:
-      {\myurlfont\textnormal{\textbf{#2}}} % without link
-      {\myhttplink[\color{black}{\textnormal{\textbf{#2}}}]{#5}} % with link
-    }{%
-    {\bfseries\copyright~#3}%author
-    {,~{\keyboardsymbol#4}}%programming language used
-    \ifthenelse{\equal{#5}{}}{}{,~\myhttplink[\color{black}{\linksymbol#5}]{#5}}%printed link
-    .\strut%
-    \ifx&#6&%description
-      \else{\newline{}\begin{minipage}[t]{\linewidth}\small#6\end{minipage}}\fi}}
 
 
 \newbox{\cvitemwithcommentmainbox}
