@@ -98,18 +98,6 @@
 
 % modifying endyear/startyear styles:
 \pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
-\renewcommand{\tltextend}[2][north east]{%
-   \tikzset{%
-       tl@endyear/.style={%
-           font=#2,%
-           name=tl@endyear,%
-           %below=\tl@endyearbelow,%1pt, % it was null
-           below=\tl@endyearbelow,%1pt, % it was null
-           inner xsep=0pt,%
-           anchor=#1,%default: north east
-       }%
-   }%
-}
 \renewcommand{\tltextstart}[2][north east]{%
    \tikzset{%
        tl@startyear/.style={%
@@ -117,6 +105,18 @@
            name=tl@startyear,%
            %above=\tl@startyearabove,%2pt, % it was null
            above=\tl@startyearabove,%2pt, % it was null
+           inner xsep=0pt,%
+           anchor=#1,%default: north east
+       }%
+   }%
+}
+\renewcommand{\tltextend}[2][north east]{%
+   \tikzset{%
+       tl@endyear/.style={%
+           font=#2,%
+           name=tl@endyear,%
+           %below=\tl@endyearbelow,%1pt, % it was null
+           below=\tl@endyearbelow,%1pt, % it was null
            inner xsep=0pt,%
            anchor=#1,%default: north east
        }%
