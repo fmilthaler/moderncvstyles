@@ -88,26 +88,6 @@
 }
 
 
-%% label alignment (from Gonzalo Medina: http://tex.stackexchange.com/questions/83571/moderntimeline-alignment-of-text-on-start-and-end-of-bars/83577#83577):
-%\pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
-%\NewDocumentCommand\tldatelabelcventryn{O{center}O{color1}mmmmmmm}{%
-%\pgfmathsetmacro\tl@endyear{\tl@lastyear}%
-%\pgfmathsetmacro\tl@startfraction{(#3-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
-%\pgfmathsetmacro\tl@endfraction{(\tl@endyear-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
-% \cventry{\tikz[baseline]{%
-%     \useasboundingbox (0,-1.5ex) rectangle (\hintscolumnwidth,1ex);
-%     \fill [\tl@runningcolor] (0,0)
-%        rectangle (\hintscolumnwidth,\tl@runningwidth);
-%     \fill [#2] (0,0)
-%        ++(\tl@startfraction*\hintscolumnwidth,0pt)
-%        node [tl@startyear,yshift=5pt,anchor=#1] {#4}
-%        node {$\bullet$};
-%   }%
-%}%
-%{#5}{#6}{#7}{#8}{#9}%
-%}
-
-
 % gap entry (from Gonzalo Medina: http://tex.stackexchange.com/questions/102658/moderntimeline-same-entry-two-time-spans/102734#102734):
 \newcommand{\gaptlcventry}[9]{%
 \pgfmathsetmacro\tl@endyear{ifthenelse(#4==0,\tl@lastyear,#4)}%
