@@ -43,23 +43,23 @@
 
 % vertical position of date above timeline (from ... : 
 \pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
-\renewcommand{\tltextend}[2][north east]{%
+\renewcommand{\tltextend}[3][north east][1pt]{%
    \tikzset{%
        tl@endyear/.style={%
            font=#2,%
            name=tl@endyear,%
-           below=1pt, % it was null
+           below=#3%1pt, % it was null
            inner xsep=0pt,%
            anchor=#1,%
        }%
    }%
 }
-\renewcommand{\tltextstart}[2][north east]{%
+\renewcommand{\tltextstart}[3][north east][2pt]{%
    \tikzset{%
        tl@startyear/.style={%
            font=#2,%
            name=tl@startyear,%
-           above=2pt, % it was null
+           above=#3%2pt, % it was null
            inner xsep=0pt,%
            anchor=#1,%
        }%
@@ -189,5 +189,6 @@
 }
 {\Argvi}{\Argvii}{\Argviii}{\Argix}{\Argx}%
 }
+
 
 
