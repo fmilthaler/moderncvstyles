@@ -40,6 +40,42 @@
 % switch position of start and end year (from Gonzalo Medina: http://tex.stackexchange.com/questions/83259/switch-positions-of-startyear-and-endyear-in-moderntimeline/83264#83264):
 %\pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
 
+
+% adding variables for the startyear and endyear anchors:
+\def\tl@startyearanchor{north east}
+\def\tl@endyearanchor{north east}
+% and commands to change their values:
+\newcommand{\tlstartyearanchor}[1]{%
+  \ifthenelse{\equal{#1}{}}
+  {\def\tl@startyearanchor{north east}}
+  {\def\tl@startyearanchor{#1}}
+  % and update tltextstart:
+  \tltextstartupdate{#1}{}{}
+}
+\newcommand{\tlendyearanchor}[1]{%
+  \ifthenelse{\equal{#1}{}}
+  {\def\tl@endyearanchor{north east}}
+  {\def\tl@endyearanchor{#1}}
+  % and update tltextend:
+  \tltextendupdate{#1}{}{}
+}
+% and variables and commands to change above/below values:
+\def\tl@startyearabove{2pt}
+\def\tl@endyearbelow{1pt}
+\newcommand{\tlstartyearabove}[1]{%
+  \ifthenelse{\equal{#1}{}}
+  {\def\tl@startyearabove{2pt}}
+  {\def\tl@startyearabove{#1}}
+  % and update tltextstart:
+  \tltextstartupdate{}{#1}{}
+}
+\newcommand{\tlendyearbelow}[1]{%
+  \ifthenelse{\equal{#1}{}}
+  {\def\tl@endyearbelow{1pt}}
+  {\def\tl@endyearbelow{#1}}
+  % and update tltextend:
+  \tltextendupdate{}{#1}{}
+}
 % adding a variable for the font:
 \def\tl@startyearfont{\scriptsize}
 \def\tl@endyearfont{\scriptsize}
@@ -58,42 +94,7 @@
   % and update tltextend:
   \tltextendupdate{}{}{#1}
 }
-% adding variables for the startyear and endyear anchors:
-\def\tl@startyearanchor{north east}
-\def\tl@endyearanchor{north east}
-% and for the above/below values:
-\def\tl@startyearabove{2pt}
-\def\tl@endyearbelow{1pt}
-% and commands to change their values:
-\newcommand{\tlstartyearanchor}[1]{%
-  \ifthenelse{\equal{#1}{}}
-  {\def\tl@startyearanchor{north east}}
-  {\def\tl@startyearanchor{#1}}
-  % and update tltextstart:
-  \tltextstartupdate{#1}{}{}
-}
-\newcommand{\tlendyearanchor}[1]{%
-  \ifthenelse{\equal{#1}{}}
-  {\def\tl@endyearanchor{north east}}
-  {\def\tl@endyearanchor{#1}}
-  % and update tltextend:
-  \tltextendupdate{#1}{}{}
-}
 
-\newcommand{\tlstartyearabove}[1]{%
-  \ifthenelse{\equal{#1}{}}
-  {\def\tl@startyearabove{2pt}}
-  {\def\tl@startyearabove{#1}}
-  % and update tltextstart:
-  \tltextstartupdate{}{#1}{}
-}
-\newcommand{\tlendyearbelow}[1]{%
-  \ifthenelse{\equal{#1}{}}
-  {\def\tl@endyearbelow{1pt}}
-  {\def\tl@endyearbelow{#1}}
-  % and update tltextend:
-  \tltextendupdate{}{#1}{}
-}
 
 % modifying endyear/startyear styles:
 \pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
@@ -122,6 +123,7 @@
    }%
 }
 
+% and commands to update certain values of the styles:
 %usage: \tltextstartupdate{anchor}{above}{font}
 \newcommand{\tltextstartupdate}[3]{%
    % anchor:
