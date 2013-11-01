@@ -1,0 +1,226 @@
+%% moderntimelinetweaks.sty
+%% Copyright 2013 Frank Milthaler
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+% 
+% These tweaks are basically a collection of useful commands found on
+% stackexchange.com and should improve and extend the moderntimeline
+% package.
+%
+% The Current Maintainer of this file file is Frank Milthaler.
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderntimelinetweaks}[2013/11/01 some tweaks and additions for v0.6 of the moderntimeline package]
+
+
+
+% variable for cvitem spacing:
+% First, define two default variable for big and small spacings:
+\def\tl@smallspacing{0.25ex}
+\def\tl@bigspacing{0.25em}
+\def\tl@spacing{\tl@bigspacing}
+% and a command to change the current spacing variable:
+\newcommand{\tlspacing}[1]{%
+  \ifthenelse{\equal{#1}{}}%
+  {\def\tl@spacing{\tl@bigspacing}}
+  {%
+    \ifthenelse{\equal{#1}{big}}%
+    {\def\tl@spacing{\tl@bigspacing}}%
+    {%
+      \ifthenelse{\equal{#1}{small}}%
+      {\def\tl@spacing{\tl@smallspacing}}%
+      {\def\tl@spacing{#1}}%
+    }%
+  }%
+}
+\newcommand{\printtlspacing}{\vspace{\tl@spacing}\tl@spacing}
+
+% switch position of start and end year (from Gonzalo Medina: http://tex.stackexchange.com/questions/83259/switch-positions-of-startyear-and-endyear-in-moderntimeline/83264#83264):
+%\pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
+
+
+% vertical position of date above timeline (from ... : 
+\pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
+\renewcommand{\tltextend}[2][north east]{%
+   \tikzset{%
+       tl@endyear/.style={%
+           font=#2,%
+           name=tl@endyear,%
+           below=1pt, % it was null
+           inner xsep=0pt,%
+           anchor=#1,%
+       }%
+   }%
+}
+\renewcommand{\tltextstart}[2][north east]{%
+   \tikzset{%
+       tl@startyear/.style={%
+           font=#2,%
+           name=tl@startyear,%
+           above=2pt, % it was null
+           inner xsep=0pt,%
+           anchor=#1,%
+       }%
+   }%
+}
+%\renewcommand{\tltextlabel}[2][north east]{%
+%   \tikzset{%
+%       tl@labelyear/.style={%
+%           font=#2,%
+%           name=tl@labelyear,%
+%           above=2pt, % it was null
+%           inner xsep=0pt,%
+%           anchor=#1,%
+%       }%
+%   }%
+%}
+
+
+% shifting label to center of timeline (from Jake: http://tex.stackexchange.com/questions/54705/moderncv-with-moderntimeline-how-do-i-center-the-label-above-the-timeline/54757#54757):
+\tikzset{
+    tl@startyear/.append style={
+        xshift=(0.5-\tl@startfraction)*\hintscolumnwidth,
+        anchor=base%
+    }%
+}
+
+
+%% label alignment (from Gonzalo Medina: http://tex.stackexchange.com/questions/83571/moderntimeline-alignment-of-text-on-start-and-end-of-bars/83577#83577):
+%\pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
+%\NewDocumentCommand\tldatelabelcventryn{O{center}O{color1}mmmmmmm}{%
+%\pgfmathsetmacro\tl@endyear{\tl@lastyear}%
+%\pgfmathsetmacro\tl@startfraction{(#3-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+%\pgfmathsetmacro\tl@endfraction{(\tl@endyear-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+% \cventry{\tikz[baseline]{%
+%     \useasboundingbox (0,-1.5ex) rectangle (\hintscolumnwidth,1ex);
+%     \fill [\tl@runningcolor] (0,0)
+%        rectangle (\hintscolumnwidth,\tl@runningwidth);
+%     \fill [#2] (0,0)
+%        ++(\tl@startfraction*\hintscolumnwidth,0pt)
+%        node [tl@startyear,yshift=5pt,anchor=#1] {#4}
+%        node {$\bullet$};
+%   }%
+%}%
+%{#5}{#6}{#7}{#8}{#9}%
+%}
+
+
+% gap entry (from Gonzalo Medina: http://tex.stackexchange.com/questions/102658/moderntimeline-same-entry-two-time-spans/102734#102734):
+\newcommand{\gaptlcventry}[9]{%
+\pgfmathsetmacro\tl@endyear{ifthenelse(#4==0,\tl@lastyear,#4)}%
+\pgfmathsetmacro\tl@startfraction{(#1-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+\pgfmathsetmacro\tl@endfraction{(#2-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+%
+\pgfmathsetmacro\tl@startsfraction{(#3-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%new
+\pgfmathsetmacro\tl@endsfraction{(#4-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%new
+%
+\pgfmathsetlength{\pgf@xa}{#4}%
+\ifdim\pgf@xa=0pt 
+  \def\tl@startlabel{\tl@since #1} 
+  \def\tl@startslabel{\tl@since #3}%new 
+\else 
+  \def\tl@startlabel{#1} 
+  \def\tl@startslabel{#3}%new 
+\fi
+ \cventry[\tl@spacing]{\tikz[baseline=0pt]{
+    \useasboundingbox (0,-1.5ex) rectangle (\hintscolumnwidth,1ex);
+    \fill [\tl@runningcolor] (0,0)
+       rectangle (\hintscolumnwidth,\tl@runningwidth);
+    \fill [color1] (0,0)
+       ++(\tl@startfraction*\hintscolumnwidth,0pt)
+       node [tl@startyear] {\tl@startlabel}
+       rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt)
+       node [tl@endyear] {\pgfmathparse{ifthenelse(#2==0,,#2)}\pgfmathresult}
+       (\hintscolumnwidth,0pt) ;
+%%new
+    \fill [color1] (0,0)
+       ++(\tl@startsfraction*\hintscolumnwidth,0pt)
+       node [tl@startyear] {\tl@startslabel}
+       rectangle (\tl@endsfraction*\hintscolumnwidth,\tl@width-1pt)
+       node [tl@endyear] {\pgfmathparse{ifthenelse(#4==0,,#4)}\pgfmathresult}
+       (\hintscolumnwidth,0pt) ;
+%%endnew
+    \pgfmathsetlength{\pgf@xa}{#4} 
+    \ifdim\pgf@xa=0pt
+       \shade [left color=color1] (\tl@startfraction*\hintscolumnwidth,0)
+           rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width);
+%%new
+       \shade [left color=color1] (\tl@startsfraction*\hintscolumnwidth,0)
+           rectangle (\tl@endsfraction*\hintscolumnwidth,\tl@width);
+%%endnew
+    \else
+       \fill [color1] (\tl@startfraction*\hintscolumnwidth,0)
+           rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width);
+%%new
+       \fill [color1] (\tl@startsfraction*\hintscolumnwidth,0)
+           rectangle (\tl@endsfraction*\hintscolumnwidth,\tl@width);
+%%endnew
+    \fi
+    }%
+}%
+{#5}{#6}{#7}{#8}{#9}%
+}
+
+
+
+% label alignment for tldatelabelcventry commands (from Gonzalo Medina: http://tex.stackexchange.com/questions/133467/questions-about-moderntimeline-in-moderncv/133817#133817):
+\pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
+\NewDocumentCommand\tldatelabelcventryn{O{center}O{color1}mmmmmmm}{%
+\pgfmathsetmacro\tl@endyear{\tl@lastyear}%
+\pgfmathsetmacro\tl@startfraction{(#3-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+\pgfmathsetmacro\tl@endfraction{(\tl@endyear-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+ \cventry[\tl@spacing]{\tikz[baseline]{%
+     \useasboundingbox (0,-1.5ex) rectangle (\hintscolumnwidth,1ex);
+     \fill [\tl@runningcolor] (0,0)
+        rectangle (\hintscolumnwidth,\tl@runningwidth);
+     \fill [#2] (0,0)
+        ++(\tl@startfraction*\hintscolumnwidth,0pt)
+        node [tl@startyear,yshift=4pt,anchor=#1] {#4}
+        node {$\bullet$};
+   }%
+}%
+{#5}{#6}{#7}{#8}{#9}%
+}
+\newcommand\tllabelcventryn[9][color1]{%
+  \gdef\Argi{#1}%
+  \gdef\Argii{#2}%
+  \gdef\Argiii{#3}%
+  \gdef\Argiv{#4}%
+  \gdef\Argv{#5}%
+  \gdef\Argvi{#6}%
+  \gdef\Argvii{#7}%
+  \gdef\Argviii{#8}%
+  \gdef\Argix{#9}%
+  \auxtllabelcventryn
+}
+\def\auxtllabelcventryn#1{%
+  \gdef\Argx{#1}%
+\pgfmathsetmacro\tl@endyear{ifthenelse(\Argiii==0,\tl@lastyear,\Argiii)}
+\pgfmathsetmacro\tl@startfraction{(\Argii-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+\pgfmathsetmacro\tl@endfraction{(\tl@endyear-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+ \cventry[\tl@spacing]{\tikz[baseline=0pt]{
+     \fill [\tl@runningcolor] (0,0)
+        rectangle (\hintscolumnwidth,\tl@runningwidth);
+     \useasboundingbox (0,-1.5ex)
+        rectangle (\hintscolumnwidth,1ex);
+     \fill [\Argi] (0,0)
+        ++(\tl@startfraction*\hintscolumnwidth,0pt)
+        node [tl@startyear,anchor=north east] {\Argiv} node [tl@endyear,above=2pt,anchor=south west] {\Argv}
+        rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt);
+     \pgfmathsetlength{\pgf@xa}{\Argiii} \ifdim\pgf@xa=0pt
+        \shade [left color=\Argi] (\tl@startfraction*\hintscolumnwidth,0)
+            rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width);
+     \else
+        \fill [\Argi] (\tl@startfraction*\hintscolumnwidth,0)
+            rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width);
+     \fi
+     }
+}
+{\Argvi}{\Argvii}{\Argviii}{\Argix}{\Argx}%
+}
+
+
+
