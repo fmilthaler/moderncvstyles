@@ -41,27 +41,56 @@
 %\pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
 
 
-% vertical position of date above timeline (from ... : 
+% adding variables for the startyear and endyear anchors:
+\def\tl@startyearanchor{north east}
+\def\tl@endyearanchor{north east}
+% and for the above/below values:
+\def\tl@startyearabove{2pt}
+\def\tl@endyearbelow{1pt}
+% and commands to change their values:
+\newcommand{\tlstartyearanchor}[1]{%
+  \ifthenelse{\equal{#1}{}}
+  {\def\tl@startyearanchor{north east}}
+  {\def\tl@startyearanchor{#1}}
+}
+\newcommand{\tlendyearanchor}[1]{%
+  \ifthenelse{\equal{#1}{}}
+  {\def\tl@endyearanchor{north east}}
+  {\def\tl@endyearanchor{#1}}
+}
+
+\newcommand{\tlstartyearabove}[1]{%
+  \ifthenelse{\equal{#1}{}}
+  {\def\tl@startyearabove{2pt}}
+  {\def\tl@startyearabove{#1}}
+}
+\newcommand{\tlendyearbelow}[1]{%
+  \ifthenelse{\equal{#1}{}}
+  {\def\tl@endyearbelow{1pt}}
+  {\def\tl@endyearbelow{#1}}
+}
+
+% modifying endyear/startyear styles:
 \pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
-\renewcommand{\tltextend}[3][north east][1pt]{%
+\renewcommand{\tltextend}[2][north east]{%
    \tikzset{%
        tl@endyear/.style={%
            font=#2,%
            name=tl@endyear,%
-           below=#3%1pt, % it was null
+           below=\tl@endyearbelow,%1pt, % it was null
            inner xsep=0pt,%
-           anchor=#1,%
+           anchor=#1,%default: north east
        }%
    }%
 }
-\renewcommand{\tltextstart}[3][north east][2pt]{%
+\renewcommand{\tltextstart}[2][north east]{%
    \tikzset{%
        tl@startyear/.style={%
            font=#2,%
            name=tl@startyear,%
-           above=#3%2pt, % it was null
+           above=\tl@startyearabove,%2pt, % it was null
            inner xsep=0pt,%
-           anchor=#1,%
+           anchor=#1,%default: north east
        }%
    }%
 }
@@ -176,8 +205,13 @@
         rectangle (\hintscolumnwidth,1ex);
      \fill [\Argi] (0,0)
         ++(\tl@startfraction*\hintscolumnwidth,0pt)
-        node [tl@startyear,anchor=north east] {\Argiv} node [tl@startyear,above] {\Argv}
-        rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt);
+        node [tl@startyear,above=\tl@startyearabove,anchor=\tl@startyearanchor] {\Argiv} 
+        %rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt)
+        %node [tl@endyear] ;%{\pgfmathparse{ifthenelse(#3==0,,#3)}\pgfmathresult}
+       %(\hintscolumnwidth,0pt) ;
+        rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt)
+        node [tl@endyear,below=\tl@endyearbelow,anchor=\tl@endyearanchor] {\Argv};
+        %rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt);
      \pgfmathsetlength{\pgf@xa}{\Argiii} \ifdim\pgf@xa=0pt
         \shade [left color=\Argi] (\tl@startfraction*\hintscolumnwidth,0)
             rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width);
