@@ -158,8 +158,8 @@
      {\def\tl@intextendyearanchor{#1}}   
    % above value:
    \ifthenelse{\equal{#2}{}}
-     {\def\tl@intextendyearabove{\tl@endyearabove}}
-     {\def\tl@intextendyearabove{#2}}   
+     {\def\tl@intextendyearbelow{\tl@endyearbelow}}
+     {\def\tl@intextendyearbelow{#2}}   
    % font: 
    \ifthenelse{\equal{#3}{}}
      {\def\tl@intextendyearfont{\tl@endyearfont}}
@@ -168,8 +168,8 @@
        tl@endyear/.style={%
            font=\tl@intextendyearfont,%
            name=tl@endyear,%
-           %below=\tl@endyearabove,%1pt, % it was null
-           below=\tl@intextendyearabove,%1pt, % it was null
+           %below=\tl@endyearbelow,%1pt, % it was null
+           below=\tl@intextendyearbelow,%1pt, % it was null
            inner xsep=0pt,%
            anchor=\tl@intextendyearanchor,%default: north east
        }%
