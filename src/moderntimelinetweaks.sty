@@ -187,7 +187,7 @@
         rectangle (\hintscolumnwidth,1ex);
      \fill [\Argi] (0,0)
         ++(\tl@startfraction*\hintscolumnwidth,0pt)
-        node [tl@startyear,anchor=north east] {\Argiv} node [tl@endyear,above=2pt,anchor=south west] {\Argv}
+        node [tl@startyear,anchor=north east] {\Argiv} node [tl@startyear,above] {\Argv}
         rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt);
      \pgfmathsetlength{\pgf@xa}{\Argiii} \ifdim\pgf@xa=0pt
         \shade [left color=\Argi] (\tl@startfraction*\hintscolumnwidth,0)
@@ -200,6 +200,5 @@
 }
 {\Argvi}{\Argvii}{\Argviii}{\Argix}{\Argx}%
 }
-
 
 
