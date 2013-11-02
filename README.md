@@ -16,7 +16,7 @@
 
 moderncvstyles
 ==============
-This packages provides a few tweaks/additions to the popular LaTeX moderncv and moderntimeline packages.
+This packages provides a few tweaks/additions/styles to the popular LaTeX moderncv and moderntimeline packages.
 
 Dependencies
 ==============
