@@ -32,9 +32,32 @@
 %                colors
 %-------------------------------------------------------------------------------
 % Modifying colors (forcing certain colors for now):
-\definecolor{namecolor}{RGB}{33,85,143} % always blue for now
+\definecolor{namecolor}{rgb}{0.1294,0.3333,0.5608} % blue
 \definecolor{quotecolor}{rgb}{0.65,0.65,0.65} % grey
 \definecolor{myurlcolor}{rgb}{0.35,0.35,0.35} % grey
+\newcommand*{\definenamecolor}[3]{%
+  \ifthenelse{\equal{#1}{}}%
+  {\definecolor{namecolor}{rgb}{0.1294}{0.3333}{0.5608}} % default always blue for now
+  {\definecolor{namecolor}{rgb}{#1,#2,#3}}
+}
+\newcommand*{\definequotecolor}[3]{%
+  \ifthenelse{\equal{#1}{}}%
+  {\definecolor{quotecolor}{rgb}{0.65,0.65,0.65}} % default always light grey for now
+  {\definecolor{quotecolor}{rgb}{#1,#2,#3}}
+}
+\newcommand*{\definemyurlcolor}[3]{%
+  \ifthenelse{\equal{#1}{}}%
+  {\definecolor{myurlcolor}{rgb}{0.35,0.35,0.35}} % default always grey for now
+  {\definecolor{myurlcolor}{rgb}{#1,#2,#3}}
+}
+% also a command to overwrite color1 (title, section, subsection, hintcolumn):
+\newcommand*{\definecolori}[3]{%
+  \ifthenelse{\equal{#1}{}}%
+  {\definecolor{color1}{rgb}{0.35,0.35,0.35}} % default always grey for now
+  {\definecolor{color1}{rgb}{#1,#2,#3}}
+}
+
+
 
 %-------------------------------------------------------------------------------
 %                resume style definition
