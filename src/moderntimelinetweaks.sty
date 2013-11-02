@@ -246,21 +246,21 @@
 
 % label alignment for tldatelabelcventry commands (from Gonzalo Medina: http://tex.stackexchange.com/questions/133467/questions-about-moderntimeline-in-moderncv/133817#133817):
 \pgfmathsetmacro\tl@textstartabove{\tl@width-2pt}
-\NewDocumentCommand\tldatelabelcventryn{O{center}O{color1}mmmmmmm}{%
+\NewDocumentCommand\tldatelabelcventryn{O{color1}mmmmmmm}{%
 \pgfmathsetmacro\tl@endyear{\tl@lastyear}%
-\pgfmathsetmacro\tl@startfraction{(#3-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+\pgfmathsetmacro\tl@startfraction{(#2-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
 \pgfmathsetmacro\tl@endfraction{(\tl@endyear-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
  \cventry[\tl@spacing]{\tikz[baseline]{%
      \useasboundingbox (0,-1.5ex) rectangle (\hintscolumnwidth,1ex);
      \fill [\tl@runningcolor] (0,0)
         rectangle (\hintscolumnwidth,\tl@runningwidth);
-     \fill [#2] (0,0)
+     \fill [#1] (0,0)
         ++(\tl@startfraction*\hintscolumnwidth,0pt)
-        node [tl@startyear,yshift=4pt,anchor=#1] {#4}
+        node [tl@endyear] {#3}
         node {$\bullet$};
    }%
 }%
-{#5}{#6}{#7}{#8}{#9}%
+{#4}{#5}{#6}{#7}{#8}%
 }
 \newcommand\tllabelcventryn[9][color1]{%
   \gdef\Argi{#1}%
@@ -279,6 +279,7 @@
 \pgfmathsetmacro\tl@endyear{ifthenelse(\Argiii==0,\tl@lastyear,\Argiii)}
 \pgfmathsetmacro\tl@startfraction{(\Argii-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
 \pgfmathsetmacro\tl@endfraction{(\tl@endyear-\tl@firstyear)/(\tl@lastyear-\tl@firstyear)}%
+\pgfmathsetlength{\pgf@xa}{\Argiii} \ifdim\pgf@xa=0pt \def\tl@startlabel{\tl@since \Argii} \else \def\tl@startlabel{\Argii} \fi
  \cventry[\tl@spacing]{\tikz[baseline=0pt]{
      \fill [\tl@runningcolor] (0,0)
         rectangle (\hintscolumnwidth,\tl@runningwidth);
@@ -286,13 +287,9 @@
         rectangle (\hintscolumnwidth,1ex);
      \fill [\Argi] (0,0)
         ++(\tl@startfraction*\hintscolumnwidth,0pt)
-        node [tl@startyear,above=\tl@startyearabove,anchor=\tl@startyearanchor] {\Argiv} 
-        %rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt)
-        %node [tl@endyear] ;%{\pgfmathparse{ifthenelse(#3==0,,#3)}\pgfmathresult}
-       %(\hintscolumnwidth,0pt) ;
+        node [tl@startyear] {\Argiv} 
         rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt)
-        node [tl@endyear,below=\tl@endyearbelow,anchor=\tl@endyearanchor] {\Argv};
-        %rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width-1pt);
+        node [tl@endyear] {\Argv};
      \pgfmathsetlength{\pgf@xa}{\Argiii} \ifdim\pgf@xa=0pt
         \shade [left color=\Argi] (\tl@startfraction*\hintscolumnwidth,0)
             rectangle (\tl@endfraction*\hintscolumnwidth,\tl@width);
@@ -304,6 +301,4 @@
 }
 {\Argvi}{\Argvii}{\Argviii}{\Argix}{\Argx}%
 }
-
-
 
