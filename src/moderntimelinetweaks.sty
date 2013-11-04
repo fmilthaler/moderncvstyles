@@ -19,6 +19,7 @@
 
 % variable for cvitem spacing:
 % First, define two default variable for big and small spacings:
+\def\tl@smalltlspacing{-0.4ex}
 \def\tl@smallspacing{0.25ex}
 \def\tl@bigspacing{0.25em}
 \def\tl@spacing{\tl@bigspacing}
@@ -32,7 +33,11 @@
     {%
       \ifthenelse{\equal{#1}{small}}%
       {\def\tl@spacing{\tl@smallspacing}}%
-      {\def\tl@spacing{#1}}%
+      {%
+        \ifthenelse{\equal{#1}{smalltl}}%
+        {\def\tl@spacing{\tl@smalltlspacing}}%
+        {\def\tl@spacing{#1}}%
+      }%
     }%
   }%
 }
