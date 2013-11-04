@@ -24,6 +24,10 @@ Dependencies
   * moderncv package (>= v. 1.5.1, see http://www.ctan.org/pkg/moderncv)
   * moderntimeline package (>= v. 0.6, see http://www.ctan.org/pkg/moderntimeline)
 
+Note
+==============
+This is still in development, but has been proven useful to 3 different cvs so far. Documentation and examples shall be added when I find some free time.
+
 Credit
 ==============
 The moderncv package written and maintained by Xavier Danaux can be downloaded here: http://www.ctan.org/pkg/moderncv.
