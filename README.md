@@ -11,7 +11,7 @@
     The Current Maintainer of this work is Frank Milthaler.
     This work currently consists of the LaTeX style files
      * moderncvstylemytheme.sty,
-     * moderncvstylestweaks.sty, and
+     * moderncvstylestweaks.sty,
      * moderntimelinetweaks.sty.
 
 moderncvstyles
