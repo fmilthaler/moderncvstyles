@@ -308,6 +308,7 @@
   \@date\\[2em]% US informal style: "January 1, 1900"; UK formal style: "01/01/1900"
   % opening
   %\raggedright%
+  \ifthenelse{\isundefined{\@jobreference}}{}{\@jobreference\\[1.5em]}%
   \@opening\\[1.5em]%
   % ensure no extra spacing after \makelettertitle due to a possible blank line
 %  \ignorespacesafterend% not working
