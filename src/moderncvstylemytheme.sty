@@ -158,12 +158,18 @@
   \begin{minipage}[b]{\makecvtitlenamewidth}%
   \raggedleft
     \namestyle{\@firstname\ \@lastname}%
-    \ifthenelse{\equal{\@titleone}{}}{}{\\[0.75em]\titlestyle{\@titleone}
-      \ifthenelse{\equal{\@titletwo}{}}{}{\\[0.15em]\titlestyle{\@titletwo}
-        \ifthenelse{\equal{\@titlethree}{}}{}{\\[0.15em]\titlestyle{\@titlethree}
+    \ifthenelse{\isundefined{\@titleone}}{}{\\[0.75em]\titlestyle{\@titleone}%
+      \ifthenelse{\isundefined{\@titletwo}}{}{\\[0.15em]\titlestyle{\@titletwo}%
+        \ifthenelse{\isundefined{\@titlethree}}{}{\\[0.15em]\titlestyle{\@titlethree}%
         }%
       }%
     }%
+%    \ifthenelse{\equal{\@titleone}{}}{}{\\[0.75em]\titlestyle{\@titleone}
+%      \ifthenelse{\equal{\@titletwo}{}}{}{\\[0.15em]\titlestyle{\@titletwo}
+%        \ifthenelse{\equal{\@titlethree}{}}{}{\\[0.15em]\titlestyle{\@titlethree}
+%        }%
+%      }%
+%    }%
   \end{minipage}\vspace{-1ex}\\%\\%
   {\color{quotecolor}\rule{\textwidth}{.25ex}}%
   % vertical distance:
