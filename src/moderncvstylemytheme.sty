@@ -180,9 +180,11 @@
     {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2em]}}%
   \par}% to avoid weird spacing bug at the first section if no blank line is left after \makecvtitle
 
-% new variable for section bar height:
+% new variable for section bar height and length:
 \newlength{\sectionbarheight}
 \setlength{\sectionbarheight}{0.95ex}
+\newlength{\sectionbarlength}
+\setlength{\sectionbarlength}{\hintscolumnwidth}
 \newlength{\baseletterheight}
 \settoheight{\baseletterheight}{\sectionstyle{o}}
 \setlength{\baseletterheight}{\baseletterheight-0.95ex}
@@ -190,7 +192,7 @@
   \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{section}{#2}%
-  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\hintscolumnwidth}{\sectionbarheight}}}%
+  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\sectionbarlength}{\sectionbarheight}}}%
   \hspace{\separatorcolumnwidth}%
   \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#2}}%
   \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
