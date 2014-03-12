@@ -18,7 +18,7 @@
 
 % Loading some tweaks/additions to the moderncv package
 \RequirePackage{moderncvstylestweaks}
-
+\RequirePackage{tikz}
 %-------------------------------------------------------------------------------
 %                required packages
 %-------------------------------------------------------------------------------
@@ -196,6 +196,22 @@
   \hspace{\separatorcolumnwidth}%
   \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#2}}%
   \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
+
+
+\NewDocumentCommand{\fancysection}{sm}{%
+  \par\addvspace{2.5ex}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{section}{#2}%
+  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{%
+      \tikz{%
+        \shade[left color=white, right color=color1, middle color=color1] (0,0) rectangle (\sectionbarlength, \sectionbarheight);
+      }%
+    }%
+  }%
+  \hspace{\separatorcolumnwidth}%
+  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#2}}%
+  \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
+
 
 \RenewDocumentCommand{\subsection}{sm}{%
   \par\addvspace{1ex}%
