@@ -56,8 +56,22 @@
   {\definecolor{color1}{rgb}{0.35,0.35,0.35}} % default always grey for now
   {\definecolor{color1}{rgb}{#1,#2,#3}}
 }
-
-
+% color for fancy section bar:
+\def\sbarcolorleft{white}
+\def\sbarcolorright{color1}
+\def\sbarcolormiddle{}
+\newcommand*{\definesbarcolors}[3]{
+  \ifthenelse{\equal{#1}{}}
+  {}
+  {\def\sbarcolorleft{#1}}
+  \ifthenelse{\equal{#2}{}}
+  {}
+  {\def\sbarcolorright{#2}}
+  \ifthenelse{\equal{#3}{}}
+  {}
+  {\def\sbarcolormiddle{#3}}
+}
+  
 
 %-------------------------------------------------------------------------------
 %                resume style definition
@@ -66,7 +80,13 @@
 \newcommand*{\myurlfont}{\small\slshape} % \scshape \ttfamily
 % styles:
 \newcommand*{\myurlstyle}[1]{{\myurlfont\color{myurlcolor}{#1}}}
-
+% style for the section bar (plain/shaded):
+\def\sbar@style{plain} % default: plain
+\newcommand*{\sbarstyle}[1]{%
+  \ifthenelse{\equal{#1}{shaded}}%
+    {\def\sbar@style{shaded}}%
+    {\def\sbar@style{plain}}
+}
 
 % Adding some commands:
 % Adding a new httplink command:
