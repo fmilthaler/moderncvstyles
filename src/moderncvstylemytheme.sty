@@ -203,10 +203,20 @@
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{section}{#2}%
   \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{%
-      \tikz{%
-        \shade[left color=white, right color=color1, middle color=color1] (0,0) rectangle (\sectionbarlength, \sectionbarheight);
+      \ifthenelse{\equal{\sbar@style}{shaded}}%
+      {%
+        \ifthenelse{\equal{\sbarcolormiddle}{}}%
+          {\tikz{%
+            \shade[left color=\sbarcolorleft, right color=\sbarcolorright] (0,0) rectangle (\sectionbarlength, \sectionbarheight);}%
+          }%
+          {\tikz{%
+            \shade[left color=\sbarcolorleft, right color=\sbarcolorright, middle color=\sbarcolormiddle] (0,0) rectangle (\sectionbarlength, \sectionbarheight);}%
+          }%
       }%
-    }%
+      {%
+        \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\sectionbarlength}{\sectionbarheight}}}%
+      }%
+    }
   }%
   \hspace{\separatorcolumnwidth}%
   \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#2}}%
