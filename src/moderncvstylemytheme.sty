@@ -188,6 +188,7 @@
 \newlength{\baseletterheight}
 \settoheight{\baseletterheight}{\sectionstyle{o}}
 \setlength{\baseletterheight}{\baseletterheight-0.95ex}
+%\setlength{\baseletterheight}{\baseletterheight-\sectionbarheight}
 \RenewDocumentCommand{\section}{sm}{%
   \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
@@ -198,7 +199,8 @@
   \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
 
 
-\NewDocumentCommand{\fancysection}{sm}{%
+%\NewDocumentCommand{\fancysection}{sm}{%
+\RenewDocumentCommand{\section}{sm}{%
   \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{section}{#2}%
