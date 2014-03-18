@@ -167,6 +167,16 @@
   }
 }
 
+% providing a command 'chapter' for bigger section titles:
+\NewDocumentCommand{\chapter}{sm}{%
+  \par\addvspace{2.5ex}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{section}{#2}%
+  \parbox[t]{\hintscolumnwidth}{\hspace{\hintscolumnwidth}}%
+  \hspace{\separatorcolumnwidth}%
+  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{\huge{#2}}}%
+  \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
+
 % for the cover letter:
 % adding another optional command to specify the reference name/code:
 \newcommand*{\jobreference}[1]{\def\@jobreference{#1}}
