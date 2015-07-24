@@ -109,8 +109,7 @@
   \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
     \protected@edef\socialsdetails{\socialsdetails\protect\\\csname\collectionloopkey socialsymbol\endcsname & & \collectionloopitem}}%
   \newbox{\makecvtitledetailsbox}%
-    \ifthenelse{\isundefined{\@cvaddress}}{}{%
-%    \ifthenelse{\equal{\@cvaddress}{}}{}{%
+  \ifthenelse{\isundefined{\@nocvaddress}}{%
     \savebox{\makecvtitledetailsbox}{%
       \addressfont\color{color2}%
       %\begin{tabular}[b]{l@{}l@{}}%
@@ -127,7 +126,7 @@
         \ifthenelse{\isundefined{\@extrainfo}}{}{\\ & & \@extrainfo}%
       \end{tabular}
     }%
-  }
+  }{}
   % optional photo (pre-rendering)
   \newbox{\makecvtitlepicturebox}%
   \savebox{\makecvtitlepicturebox}{%
