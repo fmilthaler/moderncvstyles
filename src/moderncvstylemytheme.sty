@@ -123,6 +123,7 @@
         \ifthenelse{\isundefined{\@email}}{}{\\\emailsymbol & & \emaillink{\@email}}%
         \ifthenelse{\isundefined{\@homepage}}{}{\\\homepagesymbol & & \httplink{\@homepage}}%
         \socialsdetails% needs to be pre-rendered as loops and tabulars seem to conflict
+        \ifthenelse{\isundefined{\@youtube}}{}{\\\youtubesymbol & & \myhttplink[\color{color2}\@youtube]{www.youtube.com/\@youtube}}%
         \ifthenelse{\isundefined{\@extrainfo}}{}{\\ & & \@extrainfo}%
       \end{tabular}
     }%
