@@ -109,25 +109,55 @@
   \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
     \protected@edef\socialsdetails{\socialsdetails\protect\\\csname\collectionloopkey socialsymbol\endcsname & & \collectionloopitem}}%
   \newbox{\makecvtitledetailsbox}%
-  \ifthenelse{\isundefined{\@nocvaddress}}{%
-    \savebox{\makecvtitledetailsbox}{%
-      \addressfont\color{color2}%
-      %\begin{tabular}[b]{l@{}l@{}}%
-      \begin{tabular}[b]{lp{1ex}l}%
-        \ifthenelse{\isundefined{\@addressstreet}}{}{\addresssymbol & & \@addressstreet%
-          \ifthenelse{\equal{\@addresslinetwo}{}}{}{\\ & & \@addresslinetwo}%
-          \ifthenelse{\equal{\@addresscity}{}}{}{\\ & & \@addresscity}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
-          \ifthenelse{\equal{\@addresscounty}{}}{}{\\ & & \@addresscounty}%
-          \ifthenelse{\equal{\@addresscountry}{}}{}{\\ & & \@addresscountry}}%
-        \phonesdetails% needs to be pre-rendered as loops and tabulars seem to conflict
-        \ifthenelse{\isundefined{\@email}}{}{\\\emailsymbol & & \emaillink{\@email}}%
-        \ifthenelse{\isundefined{\@homepage}}{}{\\\homepagesymbol & & \httplink{\@homepage}}%
-        \socialsdetails% needs to be pre-rendered as loops and tabulars seem to conflict
-        \ifthenelse{\isundefined{\@youtube}}{}{\\\youtubesymbol & & \myhttplink[\color{color2}\@youtube]{www.youtube.com/\@youtube}}%
-        \ifthenelse{\isundefined{\@extrainfo}}{}{\\ & & \@extrainfo}%
-      \end{tabular}
-    }%
-  }{}
+  % two columns:
+  \ifthenelse{\isundefined{\@addressonecolumn}}{%
+    \ifthenelse{\isundefined{\@nocvaddress}}{%
+      \savebox{\makecvtitledetailsbox} {%
+        \addressfont\color{color2}%
+        %\begin{tabular}[b]{l@{}l@{}}%
+        \begin{minipage}[t]{5cm}%[5ex]
+          \begin{tabular}[b]{lp{1ex}l}%
+            \ifthenelse{\isundefined{\@addressstreet}}{}{\addresssymbol & & \@addressstreet%
+              \ifthenelse{\equal{\@addresslinetwo}{}}{}{\\ & & \@addresslinetwo}%
+              \ifthenelse{\equal{\@addresscity}{}}{}{\\ & & \@addresscity}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
+              \ifthenelse{\equal{\@addresscounty}{}}{}{\\ & & \@addresscounty}%
+              \ifthenelse{\equal{\@addresscountry}{}}{}{\\ & & \@addresscountry}}%
+            \phonesdetails% needs to be pre-rendered as loops and tabulars seem to conflict
+          \end{tabular}
+        \end{minipage}
+        \begin{minipage}[t]{5cm}
+          \begin{tabular}[b]{lp{1ex}l}%
+            \ifthenelse{\isundefined{\@email}}{}{\\\emailsymbol & & \emaillink{\@email}}%
+            \ifthenelse{\isundefined{\@homepage}}{}{\\\homepagesymbol & & \httplink{\@homepage}}%
+            \socialsdetails% needs to be pre-rendered as loops and tabulars seem to conflict
+            \ifthenelse{\isundefined{\@youtube}}{}{\\\youtubesymbol & & \myhttplink[\color{color2}\@youtube]{www.youtube.com/\@youtube}}%
+            \ifthenelse{\isundefined{\@extrainfo}}{}{\\ & & \@extrainfo}%
+          \end{tabular}
+        \end{minipage}
+      }%
+    }{}%
+  }{%
+    % % one column:
+    \ifthenelse{\isundefined{\@nocvaddress}}{%
+      \savebox{\makecvtitledetailsbox}{%
+        \addressfont\color{color2}%
+        %\begin{tabular}[b]{l@{}l@{}}%
+        \begin{tabular}[b]{lp{1ex}l}%
+          \ifthenelse{\isundefined{\@addressstreet}}{}{\addresssymbol & & \@addressstreet%
+            \ifthenelse{\equal{\@addresslinetwo}{}}{}{\\ & & \@addresslinetwo}%
+            \ifthenelse{\equal{\@addresscity}{}}{}{\\ & & \@addresscity}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
+            \ifthenelse{\equal{\@addresscounty}{}}{}{\\ & & \@addresscounty}%
+            \ifthenelse{\equal{\@addresscountry}{}}{}{\\ & & \@addresscountry}}%
+          \phonesdetails% needs to be pre-rendered as loops and tabulars seem to conflict
+          \ifthenelse{\isundefined{\@email}}{}{\\\emailsymbol & & \emaillink{\@email}}%
+          \ifthenelse{\isundefined{\@homepage}}{}{\\\homepagesymbol & & \httplink{\@homepage}}%
+          \socialsdetails% needs to be pre-rendered as loops and tabulars seem to conflict
+          \ifthenelse{\isundefined{\@youtube}}{}{\\\youtubesymbol & & \myhttplink[\color{color2}\@youtube]{www.youtube.com/\@youtube}}%
+          \ifthenelse{\isundefined{\@extrainfo}}{}{\\ & & \@extrainfo}%
+        \end{tabular}
+      }%
+    }{}%
+  }
   % optional photo (pre-rendering)
   \newbox{\makecvtitlepicturebox}%
   \savebox{\makecvtitlepicturebox}{%
