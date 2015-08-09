@@ -117,12 +117,17 @@
       {\myurlfont\textnormal{\textbf{#2}}} % without link
       {\myhttplink[\color{black}{\textnormal{\textbf{#2}}}]{#5}} % with link
     }{%
-    {\bfseries\copyright~#3}%author
-    {,~{\keyboardsymbol#4}}%programming language used
-    \ifthenelse{\equal{#5}{}}{}{,~\myhttplink[\color{black}{\linksymbol#5}]{#5}}%printed link
+    {{#4}}%programming language used
+    %{\bfseries\copyright~#3}%author
+    {,~#3}%author
+    %{,~{\keyboardsymbol#4}}%programming language used
+    %{,~{#4}}%programming language used
+    %\ifthenelse{\equal{#5}{}}{}{,~\myhttplink[\color{black}{\linksymbol#5}]{#5}}%printed link
+    \ifthenelse{\equal{#5}{}}{}{,~\myhttplink[\color{black}{#5}]{#5}}%printed link
     .\strut%
     \ifx&#6&%description
-      \else{\newline{}\begin{minipage}[t]{\linewidth}\small#6\end{minipage}}\fi}}
+      \else{\newline{}\begin{minipage}[t]{\linewidth}\small#6\end{minipage}}\fi}
+    }
 
 
 \NewDocumentCommand{\refereeonecontact}{mG{}G{}G{}G{}mm}{%
