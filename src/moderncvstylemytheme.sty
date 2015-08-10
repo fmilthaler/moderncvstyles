@@ -38,7 +38,9 @@
 %                resume style definition
 %-------------------------------------------------------------------------------
 % fonts
-\renewcommand*{\namefont}{\fontsize{38}{40}\rmfamily\bfseries\upshape}%\itshape
+%\renewcommand*{\namefont}{\fontsize{38}{40}\rmfamily\bfseries\upshape}%\itshape
+\ifthenelse{\isundefined{\@namefontsize}}{\def\@namefontsize{\fontsize{20}{22}}}{}
+\renewcommand*{\namefont}{\@namefontsize\rmfamily\bfseries\upshape}%\itshape
 \renewcommand*{\titlefont}{\sffamily\LARGE\slshape}%\slshape\sffamily
 \renewcommand*{\addressfont}{\rmfamily\small\mdseries\slshape}
 \renewcommand*{\quotefont}{\sffamily\large\slshape}
