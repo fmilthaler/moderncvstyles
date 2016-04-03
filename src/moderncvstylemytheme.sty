@@ -114,7 +114,7 @@
   % two columns:
   \ifthenelse{\isundefined{\@addressonecolumn}}{%
     \ifthenelse{\isundefined{\@nocvaddress}}{%
-      \savebox{\makecvtitledetailsbox} {%
+      \savebox{\makecvtitledetailsbox}{%
         \addressfont\color{color2}%
         %\begin{tabular}[b]{l@{}l@{}}%
         \begin{minipage}[t]{5cm}%[5ex]
@@ -124,11 +124,67 @@
               \ifthenelse{\equal{\@addresscity}{}}{}{\\ & & \@addresscity}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
               \ifthenelse{\equal{\@addresscounty}{}}{}{\\ & & \@addresscounty}%
               \ifthenelse{\equal{\@addresscountry}{}}{}{\\ & & \@addresscountry}}%
-            \phonesdetails% needs to be pre-rendered as loops and tabulars seem to conflict
+              \ifthenelse{\isundefined{\@addressstreet}}{}{%
+                \ifthenelse{\equal{\@addresslinetwo}{}}{}{%
+                  \ifthenelse{\equal{\@addresscity}{}}{}{%
+                    \ifthenelse{\equal{\@addresscounty}{}}{}{%
+                      %\ifthenelse{\equal{\@addresscountry}{}}{}{%
+                        \ifthenelse{\isundefined{\@email}}{}{%
+                          \ifthenelse{\isundefined{\@linkedin}}{}{%
+                            \ifthenelse{\isundefined{\@homepage}}{}{%
+                              \ifthenelse{\isundefined{\@youtube}}{}{%
+                              \phonesdetails
+                              }%
+                            }%
+                          }%
+                        }%
+                      %}%
+                    }%
+                  }%
+                }%
+              }%
+              \ifthenelse{\isundefined{\@addressstreet}}{}{%
+                \ifthenelse{\equal{\@addresslinetwo}{}}{}{%
+                  \ifthenelse{\equal{\@addresscity}{}}{}{%
+                    \ifthenelse{\equal{\@addresscounty}{}}{%
+                      \ifthenelse{\equal{\@addresscountry}{}}{%
+                        \ifthenelse{\isundefined{\@email}}{}{%
+                          \ifthenelse{\isundefined{\@linkedin}}{}{%
+                            \ifthenelse{\isundefined{\@homepage}}{}{%
+                              \ifthenelse{\isundefined{\@youtube}}{}{%
+                                \phonesdetails%
+                              }%
+                            }%
+                          }%
+                        }%
+                      }{}%
+                    }{}%
+                  }%
+                }%
+              }%
+%            \phonesdetails% needs to be pre-rendered as loops and tabulars seem to conflict
           \end{tabular}
         \end{minipage}
         \begin{minipage}[t]{5cm}
           \begin{tabular}[b]{lp{1ex}l}%
+            \ifthenelse{\isundefined{\@addressstreet}}{}{%
+              \ifthenelse{\equal{\@addresslinetwo}{}}{}{%
+                \ifthenelse{\equal{\@addresscity}{}}{}{%
+                  \ifthenelse{\equal{\@addresscounty}{}}{}{%
+                    %\ifthenelse{\equal{\@addresscountry}{}}{}{%
+                      \ifthenelse{\isundefined{\@email}}{}{%
+                        \ifthenelse{\isundefined{\@linkedin}}{}{%
+                          \ifthenelse{\isundefined{\@homepage}}{\phonesdetails}{%
+                            \ifthenelse{\isundefined{\@youtube}}{\phonesdetails}{%
+                            }%
+                          }%
+                        }%
+                      }%
+                    %}%
+                  }%
+                }%
+              }%
+            }%
             \ifthenelse{\isundefined{\@email}}{}{\\\emailsymbol & & \emaillink{\@email}}%
             \ifthenelse{\isundefined{\@homepage}}{}{\\\homepagesymbol & & \httplink{\@homepage}}%
             \socialsdetails% needs to be pre-rendered as loops and tabulars seem to conflict
