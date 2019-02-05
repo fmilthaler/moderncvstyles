@@ -38,7 +38,7 @@
 %\newcommand*{\linksymbol}{\marvosymbol{90}~}
 %\newcommand*{\keyboardsymbol}{\marvosymbol{207}~}
 \newcommand*{\keyboardsymbol}{\faKeyboardO~} %\faLanguage, \faKeyboardO
-\newcommand*{\linksymbol}{{\color{color2}\faGlobe}~} %\faHandORight, \faArrowCircleORight, \faArrowCircleRight, \faGlobe, \faChain
+\newcommand*{\linksymbol}{{\color{color2}\faArrowCircleRight}~} %\faHandORight, \faArrowCircleORight, \faArrowCircleRight, \faGlobe, \faLink
 
 %-------------------------------------------------------------------------------
 %                colors
@@ -126,7 +126,7 @@
     %{,~{\keyboardsymbol#4}}%programming language used
     %{,~{#4}}%programming language used
     %\ifthenelse{\equal{#5}{}}{}{,~\myhttplink[\color{black}{\linksymbol#5}]{#5}}%printed link
-    \ifthenelse{\equal{#5}{}}{}{,~\myhttplink[\color{black}{#5}]{#5}}%printed link
+    \ifthenelse{\equal{#5}{}}{}{,~{\small\linksymbol}\myhttplink[\color{black}{#5}]{#5}}%printed link
     .\strut%
     \ifx&#6&%description
       \else{\newline{}\begin{minipage}[t]{\linewidth}\small#6\end{minipage}}\fi}
