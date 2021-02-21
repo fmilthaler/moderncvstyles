@@ -283,6 +283,19 @@
 \settoheight{\baseletterheight}{\sectionstyle{o}}
 \setlength{\baseletterheight}{\baseletterheight-0.95ex}
 %\setlength{\baseletterheight}{\baseletterheight-\sectionbarheight}
+% for fancy section:
+\newlength{\fancysectionbarlength}
+\setlength{\fancysectionbarlength}{0.675\hintscolumnwidth}
+%% \newlength{\fancysectionbarheight}
+%% \setlength{\fancysectionbarheight}{\sectionbarheight}
+\newlength{\fancybarsymbolseparatorwidth}
+\setlength{\fancybarsymbolseparatorwidth}{0.025\hintscolumnwidth}
+\newlength{\fancysectionsymbolwidth}
+\setlength{\fancysectionsymbolwidth}{0.2\hintscolumnwidth}
+\newlength{\fancyseparatorcolumnwidth}
+\setlength{\fancyseparatorcolumnwidth}{\separatorcolumnwidth}
+
+% create new/renew commands commands:
 \RenewDocumentCommand{\section}{sm}{%
   \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
@@ -293,7 +306,6 @@
   \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
 
 
-%\NewDocumentCommand{\fancysection}{sm}{%
 \RenewDocumentCommand{\section}{sm}{%
   \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
@@ -316,6 +328,35 @@
   }%
   \hspace{\separatorcolumnwidth}%
   \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#2}}%
+  \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
+
+
+% new fancy section with color/shaded bar, then symbol representing the section, followed by the section title, e.g. Education
+\NewDocumentCommand{\fancysection}{smm}{%
+  \par\addvspace{2.5ex}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{section}{#3}%
+  \parbox[t]{\fancysectionbarlength}{\strut\raggedleft\raisebox{\baseletterheight}{%
+      \ifthenelse{\equal{\sbar@style}{shaded}}%
+      {%
+        \ifthenelse{\equal{\sbarcolormiddle}{}}%
+          {\tikz{%
+              \shade[left color=\sbarcolorleft, right color=\sbarcolorright] (0,0) rectangle (\fancysectionbarlength, \sectionbarheight);}%
+            %-\fancyseparatorcolumnwidth-\fancysectionsymbolwidth, \sectionbarheight);}%
+          }%
+          {\tikz{%
+            \shade[left color=\sbarcolorleft, right color=\sbarcolorright, middle color=\sbarcolormiddle] (0,0) rectangle (\fancysectionbarlength, \sectionbarheight);}%
+          }%
+      }%
+      {%
+        \parbox[t]{\fancysectionbarlength}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\fancysectionbarlength}{\sectionbarheight}}}%
+      }%
+    }
+  }%
+  \hspace*{\fancybarsymbolseparatorwidth}
+  \parbox[t]{\fancysectionsymbolwidth}{\strut\raggedleft\sectionstyle{#2}}%\strut
+  \hspace*{\separatorcolumnwidth}
+  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#3}}%
   \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
 
 
