@@ -29,17 +29,18 @@
 %-------------------------------------------------------------------------------
 %% \moderncvicons{marvosym}
 \moderncvicons{awesome}
-\renewcommand*{\labelitemi}{\strut\textcolor{color1}{\tiny\faCircleO}} %\faCircleThin, \faCircleO
+\renewcommand*{\labelitemi}{\strut\textcolor{color1}{\tiny\faCircle[regular]}} %\faCircleThin, \faCircleO
 % And adding the symbol for the address:
-\renewcommand*{\addresssymbol}{\marvosymbol{98}~} %\faHome
-\renewcommand*{\emailsymbol}{\faEnvelopeO~} % \faInbox, \faEnvelope
-\renewcommand*{\linkedinsocialsymbol}{\faLinkedinSquare~}
+%\renewcommand*{\addresssymbol}{\marvosymbol{98}~} %\faHome
+\renewcommand*{\mobilephonesymbol}{~\faMobile*~}
+\renewcommand*{\emailsymbol}{\faEnvelope[regular]~} % \faInbox, \faEnvelope
+\renewcommand*{\linkedinsocialsymbol}{\faLinkedin~}
 \newcommand*{\youtubesymbol}{\faYoutube~}
 %\newcommand*{\linksymbol}{\marvosymbol{90}~}
 %\newcommand*{\keyboardsymbol}{\marvosymbol{207}~}
-\newcommand*{\keyboardsymbol}{\faKeyboardO~} %\faLanguage, \faKeyboardO
-\newcommand*{\linksymbol}{{\color{color2}\faArrowCircleRight}~} %\faHandORight, \faArrowCircleORight, \faArrowCircleRight, \faGlobe, \faLink
-\newcommand*{\starsymbol}{\faStarO}
+\newcommand*{\keyboardsymbol}{\faKeyboard[regular]~} %\faLanguage, \faKeyboardO
+\newcommand*{\linksymbol}{{\color{color2}\faExternalLink*}~} %\faHandORight, \faArrowCircleORight, \faArrowCircleRight, \faGlobe, \faLink
+\newcommand*{\starsymbol}{\faStar}
 
 %-------------------------------------------------------------------------------
 %                colors
@@ -128,7 +129,7 @@
     %{,~{#4}}%programming language used
     %\ifthenelse{\equal{#5}{}}{}{,~\myhttplink[\color{black}{\linksymbol#5}]{#5}}%printed link
     \ifthenelse{\equal{#5}{}}{}{,~{\small\linksymbol}\myhttplink[\color{black}{#5}]{#5}}%printed link
-    \ifthenelse{\equal{#6}{}}{}{,~{\small\starsymbol~\textbf{#6}}}%printed link
+    \ifthenelse{\equal{#6}{}}{}{,~{\color{color2}{\small\starsymbol~\textbf{#6}}}}%printed link
     .\strut%
     \ifx&#7&%description
       \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}
