@@ -99,8 +99,8 @@
   \setlength{\parskip}{0\p@}}
 
 % optional maketitle width to force a certain width (if set to 0pt, the width is calculated automatically)
-\newlength{\makecvtitlenamewidth}
-\setlength{\makecvtitlenamewidth}{0pt}% dummy value
+\newlength{\makecvmytitlenamewidth}
+\setlength{\makecvmytitlenamewidth}{0pt}% dummy value
 \renewcommand*{\makecvtitle}{%
   % recompute lengths (in case we are switching from letter to resume, or vice versa)
   \recomputecvlengths%
@@ -234,22 +234,22 @@
   % name and title
   \newlength{\makecvtitledetailswidth}\settowidth{\makecvtitledetailswidth}{\usebox{\makecvtitledetailsbox}}%
   \newlength{\makecvtitlepicturewidth}\settowidth{\makecvtitlepicturewidth}{\usebox{\makecvtitlepicturebox}}%
-  \ifthenelse{\lengthtest{\makecvtitlenamewidth=0pt}}% check for dummy value (equivalent to \ifdim\makecvtitlenamewidth=0pt)
-    {\setlength{\makecvtitlenamewidth}{\textwidth-\makecvtitledetailswidth-\makecvtitlepicturewidth}}%
+  \ifthenelse{\lengthtest{\makecvmytitlenamewidth=0pt}}% check for dummy value (equivalent to \ifdim\makecvmytitlenamewidth=0pt)
+    {\setlength{\makecvmytitlenamewidth}{\textwidth-\makecvtitledetailswidth-\makecvtitlepicturewidth}}%
     {}%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % starting to place items on the header of the resume %
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % First the address:
   % optional detailed information (rendering)
-  %\llap{\usebox{\makecvtitledetailsbox}}% \llap is used to suppress the width of the box, allowing overlap if the value of makecvtitlenamewidth is forced
-  \usebox{\makecvtitledetailsbox}% \llap is used to suppress the width of the box, allowing overlap if the value of makecvtitlenamewidth is forced
+  %\llap{\usebox{\makecvtitledetailsbox}}% \llap is used to suppress the width of the box, allowing overlap if the value of makecvmytitlenamewidth is forced
+  \usebox{\makecvtitledetailsbox}% \llap is used to suppress the width of the box, allowing overlap if the value of makecvmytitlenamewidth is forced
   \hfill%
   % Second, the optional photo:
   \usebox{\makecvtitlepicturebox}%
   \hfill%
   % Third the name and title:
-  \begin{minipage}[b]{\makecvtitlenamewidth}%
+  \begin{minipage}[b]{\makecvmytitlenamewidth}%
   \raggedleft
     \namestyle{\@firstname\ \@lastname}%
     \ifthenelse{\isundefined{\@titleone}}{}{%
